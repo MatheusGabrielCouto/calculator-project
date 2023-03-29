@@ -11,14 +11,17 @@ export const Container = styled.div`
 
 export const CalculatorContainer = styled.div`
   background-color: #202020;
-  width: 25%;
+  width: 20%;
   max-height: 380px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
-  @media (max-width: 1237px) {
+  @media (max-width: 1550px) {
+    width: 30%;
+  }
+  @media (max-width: 1026px) {
     width: 50%;
   }
   @media (max-width: 630px) {
@@ -39,6 +42,27 @@ export const ResultView = styled.div`
 export const ResultPreText = styled.h1`
   font-size: 13px;
   color: #808080;
+`;
+
+export const InputText = styled.input`
+  background-color: #202020;
+  border: none;
+  text-align: end;
+  color: #f0f0f0;
+  font-size: 35px;
+  margin-top: 5px;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  outline: none !important;
+  text-overflow: ellipsis;
+  ::placeholder {
+    color: #f0f0f0;
+  }
+
+  :focus {
+    border: none;
+  }
 `;
 
 export const ResultText = styled.h1`

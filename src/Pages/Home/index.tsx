@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import reactLogo from "../../Assets/Icons/trash.svg";
+import Button from "../../Components/Button";
 
 import * as S from "./styles";
 
@@ -73,71 +73,106 @@ export default function Home() {
     setValue(String(finishValue));
   }
 
+  function convertNumber() {
+    setValue(String(Number(value) * -1));
+  }
+
+  function inputSetValues(e: React.FormEvent<EventTarget>) {
+    const target = e.target as HTMLInputElement;
+    setValue(target.value.replace(/\D/g, ""));
+  }
+
+  function inputKeyDown(event: React.KeyboardEvent<HTMLElement>) {
+    const target = event;
+
+    switch (event.key) {
+      case "+": {
+        setOperation(event.key);
+        setHistoric(`${value} ${event.key}`);
+        setOldValue(value);
+        setValue("");
+        break;
+      }
+      case "-": {
+        setOperation(event.key);
+        setHistoric(`${value} ${event.key}`);
+        setOldValue(value);
+        setValue("");
+        break;
+      }
+      case "*": {
+        setOperation("x");
+        setHistoric(`${value} x`);
+        setOldValue(value);
+        setValue("");
+        break;
+      }
+      case "/": {
+        setOperation(event.key);
+        setHistoric(`${value} ${event.key}`);
+        setOldValue(value);
+        setValue("");
+        break;
+      }
+      case "%": {
+        percentage();
+        break;
+      }
+    }
+
+    if (target.key === "Enter") {
+      calcValue();
+    }
+  }
+
   return (
     <S.Container>
       <S.CalculatorContainer>
         <S.ResultView>
           <S.ResultPreText>{historic}</S.ResultPreText>
-          <S.ResultText>{value !== "" ? value : "0"}</S.ResultText>
+          <S.InputText
+            placeholder="0"
+            value={value}
+            autoFocus
+            onKeyDown={inputKeyDown}
+            onChange={inputSetValues}
+          />
         </S.ResultView>
         <S.KeyboardContainer>
-          <S.Button onClick={inputPreValue} value="/">
-            /
-          </S.Button>
-          <S.Button onClick={percentage}>%</S.Button>
-          <S.Button onClick={clearValues}>CE</S.Button>
-          <S.Button onClick={() => setValue("")}>
-            <S.Icon src={reactLogo} alt="Icone de lixeira" />
-          </S.Button>
-          <S.Button onClick={inputNumber} value={7} white>
-            7
-          </S.Button>
-          <S.Button onClick={inputNumber} value={8} white>
-            8
-          </S.Button>
-          <S.Button onClick={inputNumber} value={9} white>
-            9
-          </S.Button>
-          <S.Button onClick={inputPreValue} value="x">
-            x
-          </S.Button>
-          <S.Button onClick={inputNumber} value={4} white>
-            4
-          </S.Button>
-          <S.Button onClick={inputNumber} value={5} white>
-            5
-          </S.Button>
-          <S.Button onClick={inputNumber} value={6} white>
-            6
-          </S.Button>
-          <S.Button onClick={inputPreValue} value="-">
-            -
-          </S.Button>
-          <S.Button onClick={inputNumber} value={1} white>
-            1
-          </S.Button>
-          <S.Button onClick={inputNumber} value={2} white>
-            2
-          </S.Button>
-          <S.Button onClick={inputNumber} value={3} white>
-            3
-          </S.Button>
-          <S.Button onClick={inputPreValue} value="+">
-            +
-          </S.Button>
-          <S.Button
-            onClick={() => setValue(String(Number(value) * -1))}
-            value="+/-"
-            white
-          >
-            +/-
-          </S.Button>
-          <S.Button onClick={inputNumber} value={0} white>
-            0
-          </S.Button>
-          <S.Button white onClick={inputNumber} value={"."}>
-            ,
-          </S.Button>
+          <Button onClick={inputPreValue} value="/" white={false} />
+          <Button onClick={percentage} value="%" white={false} />
+          <Button onClick={clearValues} value="CE" white={false} />
+
+          <Button
+            onClick={() => setValue("")}
+            value="clear"
+            icon
+            white={false}
+          />
+
+          <Button onClick={inputNumber} value={7} white={true} />
+          <Button onClick={inputNumber} value={8} white={true} />
+          <Button onClick={inputNumber} value={9} white={true} />
+
+          <Button onClick={inputPreValue} value="x" white={false} />
+
+          <Button onClick={inputNumber} value={4} white={true} />
+          <Button onClick={inputNumber} value={5} white={true} />
+          <Button onClick={inputNumber} value={6} white={true} />
+
+          <Button onClick={inputPreValue} value="-" white={false} />
+
+          <Button onClick={inputNumber} value={1} white={true} />
+          <Button onClick={inputNumber} value={2} white={true} />
+          <Button onClick={inputNumber} value={3} white={true} />
+
+          <Button onClick={inputPreValue} value="+" white={false} />
+          <Button onClick={convertNumber} value="+/-" white={true} />
+
+          <Button onClick={inputNumber} value={0} white={true} />
+
+          <Button onClick={inputNumber} value="." white={true} />
+
           <S.ButtonConfirm onClick={calcValue} value={value}>
             =
           </S.ButtonConfirm>
