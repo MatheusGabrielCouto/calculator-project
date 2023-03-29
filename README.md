@@ -16,13 +16,4 @@ Logo após essas instruções o projeto vai estar rodando
 - Calcular clickando nos botões
 - Calcular usando o teclado numérico
 - Temas Light e Dark
-
----
-
-# Dados do Participante
-
-Nome: **Matheus Gabriel Pereira do Couto**
-
-Email: **matheus.gabriel.couto@hotmail.com**
-
-Telefone: **(69)99959-8313**
+- 
