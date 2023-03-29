@@ -15,6 +15,7 @@ Logo após essas instruções o projeto vai estar rodando
 
 - Calcular clickando nos botões
 - Calcular usando o teclado numérico
+- Temas Light e Dark
 
 ---
 
