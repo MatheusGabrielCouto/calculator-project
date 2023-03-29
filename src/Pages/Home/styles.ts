@@ -4,18 +4,32 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   height: 100vh;
-  background-color: #000;
+  background-color: ${({ theme }) => theme.wrapper};
   justify-content: center;
   padding: 20px 0;
+  transition: 300ms;
+`;
+
+export const ButtonTheme = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: 300ms;
+`;
+
+export const IconTheme = styled.img`
+  width: 25px;
 `;
 
 export const CalculatorContainer = styled.div`
-  background-color: #202020;
+  background-color: ${({ theme }) => theme.container};
   width: 20%;
   max-height: 380px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  transition: 300ms;
   justify-content: flex-end;
 
   @media (max-width: 1550px) {
@@ -41,14 +55,14 @@ export const ResultView = styled.div`
 
 export const ResultPreText = styled.h1`
   font-size: 13px;
-  color: #808080;
+  color: ${({ theme }) => theme.label};
 `;
 
 export const InputText = styled.input`
-  background-color: #202020;
+  background-color: ${({ theme }) => theme.container};
   border: none;
   text-align: end;
-  color: #f0f0f0;
+  color: ${({ theme }) => theme.inputText};
   font-size: 35px;
   margin-top: 5px;
   white-space: nowrap;
@@ -56,8 +70,10 @@ export const InputText = styled.input`
   overflow: hidden;
   outline: none !important;
   text-overflow: ellipsis;
+  transition: 300ms;
+
   ::placeholder {
-    color: #f0f0f0;
+    color: ${({ theme }) => theme.inputText};
   }
 
   :focus {
@@ -66,12 +82,13 @@ export const InputText = styled.input`
 `;
 
 export const ResultText = styled.h1`
-  color: #f0f0f0;
+  color: ${({ theme }) => theme.inputText};
   font-size: 35px;
   margin-top: 5px;
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
+  transition: 300ms;
 
   text-overflow: ellipsis;
 `;
@@ -83,31 +100,13 @@ export const KeyboardContainer = styled.div`
   padding: 5px;
 `;
 
-export const Button = styled.button<{ white?: boolean }>`
-  color: #f0f0f0;
-  background-color: ${(props) => (props.white ? "#3b3b3b" : "#323232")};
-  width: 24%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 5px;
-  margin: 1.5px;
-  border: none;
-
-  :hover {
-    background-color: ${(props) => (!props.white ? "#3b3b3b" : "#323232")};
-  }
-`;
-
 export const Icon = styled.img`
   width: 15px;
 `;
 
 export const ButtonConfirm = styled.button`
   color: #323232;
-  background-color: #76b9ed;
+  background-color: ${({ theme }) => theme.confirm};
   width: 24%;
   height: 50px;
   display: flex;
@@ -117,8 +116,9 @@ export const ButtonConfirm = styled.button`
   cursor: pointer;
   border-radius: 5px;
   margin: 1.5px;
-
+  transition: 300ms;
   :hover {
-    background-color: #5092c4;
+    background-color: ${({ theme }) => theme.confirmDark};
+    transition: 300ms;
   }
 `;

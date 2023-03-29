@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { ThemeProvider } from "styled-components";
 
 import Button from "../../Components/Button";
+import { darkTheme, lightTheme } from "../../styles/theme";
+
+import SunIncon from "../../Assets/Icons/sun.svg";
+import MoonIncon from "../../Assets/Icons/moon.svg";
 
 import * as S from "./styles";
 
 export default function Home() {
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(true);
   const [historic, setHistoric] = useState("");
 
   const [operation, setOperation] = useState<string>();
@@ -124,60 +130,74 @@ export default function Home() {
       calcValue();
     }
   }
+  console.log(lightTheme);
 
   return (
-    <S.Container>
-      <S.CalculatorContainer>
-        <S.ResultView>
-          <S.ResultPreText>{historic}</S.ResultPreText>
-          <S.InputText
-            placeholder="0"
-            value={value}
-            autoFocus
-            onKeyDown={inputKeyDown}
-            onChange={inputSetValues}
-          />
-        </S.ResultView>
-        <S.KeyboardContainer>
-          <Button onClick={inputPreValue} value="/" white={false} />
-          <Button onClick={percentage} value="%" white={false} />
-          <Button onClick={clearValues} value="CE" white={false} />
+    <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
+      <S.Container>
+        <S.ButtonTheme
+          onClick={() => {
+            setIsLightTheme(!isLightTheme);
+          }}
+        >
+          {isLightTheme ? (
+            <S.IconTheme src={MoonIncon} />
+          ) : (
+            <S.IconTheme src={SunIncon} />
+          )}
+        </S.ButtonTheme>
+        <S.CalculatorContainer>
+          <S.ResultView>
+            <S.ResultPreText>{historic}</S.ResultPreText>
+            <S.InputText
+              placeholder="0"
+              value={value}
+              autoFocus
+              onKeyDown={inputKeyDown}
+              onChange={inputSetValues}
+            />
+          </S.ResultView>
+          <S.KeyboardContainer>
+            <Button onClick={inputPreValue} value="/" white={false} />
+            <Button onClick={percentage} value="%" white={false} />
+            <Button onClick={clearValues} value="CE" white={false} />
 
-          <Button
-            onClick={() => setValue("")}
-            value="clear"
-            icon
-            white={false}
-          />
+            <Button
+              onClick={() => setValue("")}
+              value="clear"
+              icon
+              white={!isLightTheme}
+            />
 
-          <Button onClick={inputNumber} value={7} white={true} />
-          <Button onClick={inputNumber} value={8} white={true} />
-          <Button onClick={inputNumber} value={9} white={true} />
+            <Button onClick={inputNumber} value={7} white={true} />
+            <Button onClick={inputNumber} value={8} white={true} />
+            <Button onClick={inputNumber} value={9} white={true} />
 
-          <Button onClick={inputPreValue} value="x" white={false} />
+            <Button onClick={inputPreValue} value="x" white={false} />
 
-          <Button onClick={inputNumber} value={4} white={true} />
-          <Button onClick={inputNumber} value={5} white={true} />
-          <Button onClick={inputNumber} value={6} white={true} />
+            <Button onClick={inputNumber} value={4} white={true} />
+            <Button onClick={inputNumber} value={5} white={true} />
+            <Button onClick={inputNumber} value={6} white={true} />
 
-          <Button onClick={inputPreValue} value="-" white={false} />
+            <Button onClick={inputPreValue} value="-" white={false} />
 
-          <Button onClick={inputNumber} value={1} white={true} />
-          <Button onClick={inputNumber} value={2} white={true} />
-          <Button onClick={inputNumber} value={3} white={true} />
+            <Button onClick={inputNumber} value={1} white={true} />
+            <Button onClick={inputNumber} value={2} white={true} />
+            <Button onClick={inputNumber} value={3} white={true} />
 
-          <Button onClick={inputPreValue} value="+" white={false} />
-          <Button onClick={convertNumber} value="+/-" white={true} />
+            <Button onClick={inputPreValue} value="+" white={false} />
+            <Button onClick={convertNumber} value="+/-" white={true} />
 
-          <Button onClick={inputNumber} value={0} white={true} />
+            <Button onClick={inputNumber} value={0} white={true} />
 
-          <Button onClick={inputNumber} value="." white={true} />
+            <Button onClick={inputNumber} value="." white={true} />
 
-          <S.ButtonConfirm onClick={calcValue} value={value}>
-            =
-          </S.ButtonConfirm>
-        </S.KeyboardContainer>
-      </S.CalculatorContainer>
-    </S.Container>
+            <S.ButtonConfirm onClick={calcValue} value={value}>
+              =
+            </S.ButtonConfirm>
+          </S.KeyboardContainer>
+        </S.CalculatorContainer>
+      </S.Container>
+    </ThemeProvider>
   );
 }
